@@ -3,23 +3,26 @@ plugins {
     id 'application'
 }
 
-java.sourceCompatibility "VERSION_1_8"
-java.targetCompatibility "VERSION_1_8"
+java.sourceCompatibility "1.16"
+java.targetCompatibility "1.16"
 
 group 'edu.rit.iste-422'
 version '1.0-SNAPSHOT'
 
+ext {
+    javaMainClass = 'RunEdgeConvert'
+}
+
+test {
+    testLogging.showStandardStreams = true
+}
+
 application {
-    mainClassName = 'RunEdgeConvert'
+    mainClass = javaMainClass
 }
 
 repositories {
     mavenCentral()
-}
-
-task raven(type: JavaExec) {
-	main = mainClassName
-	classpath = sourceSets.main.runtimeClasspath
 }
 
 dependencies {
@@ -27,3 +30,4 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.13.3'
     implementation 'org.apache.logging.log4j:log4j-core:2.13.3'
 }
+
