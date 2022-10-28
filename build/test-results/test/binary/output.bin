@@ -1,0 +1,2 @@
+D02:15:26.140 [Test worker] WARN  EdgeConnectorTest - opt1Str = null
+b02:15:26.229 [Test worker] ERROR EdgeConnector - Number of connections (If too low it's an error1

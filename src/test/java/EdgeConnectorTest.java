@@ -1,29 +1,33 @@
 import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class EdgeConnectorTest {
-	EdgeConnector testObj;
+    EdgeConnector testObj;
+    public static Logger logger = LogManager.getLogger(EdgeConnectorTest.class.getName());
 
-	@Before
-	public void setUp() throws Exception {
-		testObj = new EdgeConnector("1|2|3|testStyle1|testStyle2");
-	}
+    @Before
+    public void setUp() throws Exception {
+        testObj = new EdgeConnector("1|2|3|testStyle1|testStyle2");
+    }
 
-	@Test
-	public void testGetNumConnector() {
-		// Example of how a value can be passed into a test
-		String opt1Str = System.getProperty("optionone");
-		final long opt1;
-		if (opt1Str == null) {
-			opt1 = 1;
-		}
-		else {
-			opt1 = Long.parseLong(opt1Str);
-		}
-		assertEquals("numConnector was intialized to 1 so it should be 1",(long)opt1,testObj.getNumConnector());
-	}
+    @Test
+    public void testGetNumConnector() {
+        // Example of how a value can be passed into a test
+        String opt1Str = System.getProperty("optionone");
+        logger.warn("opt1Str = " + opt1Str);
+        final long opt1;
+        if (opt1Str == null) {
+            opt1 = 1;
+        }
+        else {
+            opt1 = Long.parseLong(opt1Str);
+        }
+        assertEquals("numConnector was intialized to 1 so it should be 1",(long)opt1,testObj.getNumConnector());
+    }
 
 	@Test
 	public void testGetEndPoint1() {

@@ -8,6 +8,8 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.lang.reflect.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EdgeConvertGUI {
    
@@ -40,7 +42,7 @@ public class EdgeConvertGUI {
    private ArrayList alSubclasses, alProductNames;
    private String[] productNames;
    private Object[] objSubclasses;
-
+	
    //Define Tables screen objects
    static JFrame jfDT;
    static JPanel jpDTBottom, jpDTCenter, jpDTCenter1, jpDTCenter2, jpDTCenterRight, jpDTCenterRight1, jpDTCenterRight2, jpDTMove;
@@ -69,19 +71,23 @@ public class EdgeConvertGUI {
    static JMenuBar jmbDRMenuBar;
    static JMenu jmDRFile, jmDROptions, jmDRHelp;
    static JMenuItem jmiDROpenEdge, jmiDROpenSave, jmiDRSave, jmiDRSaveAs, jmiDRExit, jmiDROptionsOutputLocation, jmiDROptionsShowProducts, jmiDRHelpAbout;
-   
+
+	public static Logger logger = LogManager.getLogger(EdgeConvertGUI.class.getName());
+	public static Logger timeLogger = LogManager.getLogger("timer." + EdgeConvertGUI.class.getName());
+	
    public EdgeConvertGUI() {
       menuListener = new EdgeMenuListener();
       radioListener = new EdgeRadioButtonListener();
       edgeWindowListener = new EdgeWindowListener();
       createDDLListener = new CreateDDLButtonListener();
+	  
       this.showGUI();
    } // EdgeConvertGUI.EdgeConvertGUI()
    
    public void showGUI() {
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use the OS native LAF, as opposed to default Java LAF
-      } catch (Exception e) {
+	  } catch (Exception e) {
          System.out.println("Error setting native LAF: " + e);
       }
       createDTScreen();
@@ -103,7 +109,10 @@ public class EdgeConvertGUI {
       jfDT.setJMenuBar(jmbDTMenuBar);
 
       jmDTFile = new JMenu("File");
-      jmDTFile.setMnemonic(KeyEvent.VK_F);
+	
+	  logger.debug("New JMenu jmDTFile created.");
+    
+	  jmDTFile.setMnemonic(KeyEvent.VK_F);
       jmbDTMenuBar.add(jmDTFile);
       jmiDTOpenEdge = new JMenuItem("Open Edge File");
       jmiDTOpenEdge.setMnemonic(KeyEvent.VK_E);

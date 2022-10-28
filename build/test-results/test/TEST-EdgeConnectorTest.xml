@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EdgeConnectorTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2022-10-28T02:15:26" hostname="7e4ed2df534f" time="0.102">
+  <properties/>
+  <testcase name="testGetEndPoint1" classname="EdgeConnectorTest" time="0.001"/>
+  <testcase name="testGetEndPoint2" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testGetEndStyle1" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testGetEndStyle2" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testGetNumConnector" classname="EdgeConnectorTest" time="0.096"/>
+  <testcase name="testGetIsEP1Field" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testGetIsEP1Table" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testGetIsEP2Field" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testGetIsEP2Table" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testSetIsEP1Field" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testSetIsEP1Table" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testSetIsEP2Field" classname="EdgeConnectorTest" time="0.0"/>
+  <testcase name="testSetIsEP2Table" classname="EdgeConnectorTest" time="0.0"/>
+  <system-out><![CDATA[02:15:26.140 [Test worker] WARN  EdgeConnectorTest - opt1Str = null
+02:15:26.229 [Test worker] ERROR EdgeConnector - Number of connections (If too low it's an error1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
