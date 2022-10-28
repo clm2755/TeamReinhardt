@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
 
@@ -11,6 +13,9 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    //this array is for determining how MySQL refers to datatypes
    protected String[] strDataType = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
    protected StringBuffer sb;
+    
+     public static Logger logger = LogManager.getLogger(CreateDDLMySQL.class.getName());
+   public static Logger timeLogger = LogManager.getLogger("timer." + CreateDDLMySQL.class.getName());
 
    public CreateDDLMySQL(EdgeTable[] inputTables, EdgeField[] inputFields) {
       super(inputTables, inputFields);
@@ -25,6 +30,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
       EdgeConvertGUI.setReadSuccess(true);
       databaseName = generateDatabaseName();
       sb.append("CREATE DATABASE " + databaseName + ";\r\n");
+             logger.debug("Created Database" + databaseName); 
       sb.append("USE " + databaseName + ";\r\n");
       for (int boundCount = 0; boundCount <= maxBound; boundCount++) { //process tables in order from least dependent (least number of bound tables) to most dependent
          for (int tableCount = 0; tableCount < numBoundTables.length; tableCount++) { //step through list of tables

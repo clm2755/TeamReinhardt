@@ -1,15 +1,22 @@
 import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EdgeTable {
    private int numFigure;
    private String name;
    private ArrayList alRelatedTables, alNativeFields;
    private int[] relatedTables, relatedFields, nativeFields;
-   
+
+    public static Logger logger = LogManager.getLogger(EdgeTable.class.getName());
+  public static Logger timeLogger = LogManager.getLogger("timer." + EdgeTable.class.getName());
+
    public EdgeTable(String inputString) {
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
+             logger.info("Start Edge Table");
+            logger.debug("Edge Table Name:  " + name);
       alRelatedTables = new ArrayList();
       alNativeFields = new ArrayList();
    }

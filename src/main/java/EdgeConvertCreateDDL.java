@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public abstract class EdgeConvertCreateDDL {
    static String[] products = {"MySQL"};
@@ -13,6 +15,8 @@ public abstract class EdgeConvertCreateDDL {
    protected int maxBound;
    protected StringBuffer sb;
    protected int selected;
+     public static Logger logger = LogManager.getLogger(EdgeConvertCreateDDL.class.getName());
+   public static Logger timeLogger = LogManager.getLogger("timer." + EdgeConvertCreateDDL.class.getName());
    
    public EdgeConvertCreateDDL(EdgeTable[] tables, EdgeField[] fields) {
       this.tables = tables;
@@ -28,6 +32,7 @@ public abstract class EdgeConvertCreateDDL {
       numBoundTables = new int[tables.length];
       maxBound = 0;
       sb = new StringBuffer();
+         logger.debug("table length: " + tables.length);
 
       for (int i = 0; i < tables.length; i++) { //step through list of tables
          int numBound = 0; //initialize counter for number of bound tables
