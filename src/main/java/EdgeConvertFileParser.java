@@ -15,13 +15,13 @@ public class EdgeConvertFileParser {
    private EdgeConnector[] connectors;
    private String style;
    private String text;
-   private String tableName;
-   private String fieldName;
-   private boolean isEntity, isAttribute, isUnderlined = false;
-   private int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
-   private int endPoint1, endPoint2;
+   protected String tableName;
+   protected String fieldName;
+   protected boolean isEntity, isAttribute, isUnderlined = false;
+   protected int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
+   protected int endPoint1, endPoint2;
    private int numLine;
-   private String endStyle1, endStyle2;
+   protected String endStyle1, endStyle2;
    public static final String EDGE_ID = "EDGE Diagram File"; //first line of .edg files should be this
    public static final String SAVE_ID = "EdgeConvert Save File"; //first line of save files should be this
    public static final String DELIM = "|";
@@ -38,6 +38,7 @@ public class EdgeConvertFileParser {
       numLine = 0;
       this.openFile(parseFile);
    }
+
 
    public void parseEdgeFile() throws IOException {
       while ((currentLine = br.readLine()) != null) {
