@@ -1000,14 +1000,14 @@ public class EdgeConvertGUI {
             if (resultClass.getSuperclass().getName().equals("EdgeConvertCreateDDL")) { //only interested in classes that extend EdgeConvertCreateDDL
                if (parseFile == null && saveFile == null) {
                   conResultClass = resultClass.getConstructor(paramTypesNull);
-                  objOutput = conResultClass.newInstance((Object)null);
+                  objOutput = conResultClass.newInstance(null);
                   } else {
                   conResultClass = resultClass.getConstructor(paramTypes);
                   objOutput = conResultClass.newInstance(args);
                }
                alSubclasses.add(objOutput);
-               Method getProductName = resultClass.getMethod("getProductName", (Class)null);
-               String productName = (String)getProductName.invoke(objOutput, (Object)null);
+               Method getProductName = resultClass.getMethod("getProductName", null);
+               String productName = (String)getProductName.invoke(objOutput, null);
                alProductNames.add(productName);
             }
          }
@@ -1052,10 +1052,10 @@ public class EdgeConvertGUI {
 
       try {
          Class selectedSubclass = objSubclasses[selected].getClass();
-         Method getSQLString = selectedSubclass.getMethod("getSQLString", (Class)null);
-         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", (Class)null);
-         strSQLString = (String)getSQLString.invoke(objSubclasses[selected], (Object)null);
-         databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], (Object)null);
+         Method getSQLString = selectedSubclass.getMethod("getSQLString", null);
+         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", null);
+         strSQLString = (String)getSQLString.invoke(objSubclasses[selected], null);
+         databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], null);
       } catch (IllegalAccessException iae) {
          iae.printStackTrace();
       } catch (NoSuchMethodException nsme) {
