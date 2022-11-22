@@ -3,6 +3,7 @@ import java.util.*;
 import javax.swing.*;
 
 public class parseEdgeFile extends EdgeConvertFileParser{
+	
 	public void parseEdgeFile()  throws IOException {
       while ((currentLine = br.readLine()) != null) {
          currentLine = currentLine.trim();

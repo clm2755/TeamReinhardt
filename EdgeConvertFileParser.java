@@ -4,24 +4,24 @@ import javax.swing.*;
 
 public abstract class EdgeConvertFileParser {
    //private String filename = "test.edg";
-   private File parseFile;
-   private FileReader fr;
-   private BufferedReader br;
-   private String currentLine;
-   private ArrayList alTables, alFields, alConnectors;
-   private EdgeTable[] tables;
-   private EdgeField[] fields;
-   private EdgeField tempField;
-   private EdgeConnector[] connectors;
-   private String style;
-   private String text;
-   private String tableName;
-   private String fieldName;
-   private boolean isEntity, isAttribute, isUnderlined = false;
-   private int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
-   private int endPoint1, endPoint2;
-   private int numLine;
-   private String endStyle1, endStyle2;
+   public File parseFile;
+   public FileReader fr;
+   public BufferedReader br;
+   public String currentLine;
+   public ArrayList alTables, alFields, alConnectors;
+   public EdgeTable[] tables;
+   public EdgeField[] fields;
+   public EdgeField tempField;
+   public EdgeConnector[] connectors;
+   public String style;
+   public String text;
+   public String tableName;
+   public String fieldName;
+   public boolean isEntity, isAttribute, isUnderlined = false;
+   public int numFigure, numConnector, numFields, numTables, numNativeRelatedFields;
+   public int endPoint1, endPoint2;
+   public int numLine;
+   public String endStyle1, endStyle2;
    public static final String EDGE_ID = "EDGE Diagram File"; //first line of .edg files should be this
    public static final String SAVE_ID = "EdgeConvert Save File"; //first line of save files should be this
    public static final String DELIM = "|";
@@ -39,8 +39,7 @@ public abstract class EdgeConvertFileParser {
       this.openFile(parseFile);
    }
 
-   
-   
+	
    private void resolveConnectors() { //Identify nature of Connector endpoints
       int endPoint1, endPoint2;
       int fieldIndex = 0, table1Index = 0, table2Index = 0;
@@ -158,10 +157,12 @@ public abstract class EdgeConvertFileParser {
          }
       } // try
       catch (FileNotFoundException fnfe) {
-         System.out.println("Cannot find \"" + inputFile.getName() + "\".");
+          JOptionPane.showMessageDialog(null, "File not found.");
+		  System.out.println("Cannot find \"" + inputFile.getName() + "\".");
          System.exit(0);
       } // catch FileNotFoundException
       catch (IOException ioe) {
+		 JOptionPane.showMessageDialog(null, "Input/Output not accepted."); 
          System.out.println(ioe);
          System.exit(0);
       } // catch IOException
