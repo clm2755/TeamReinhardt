@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.lang.reflect.*;
-
 public class EdgeConvertGUI {
    
    public static final int HORIZ_SIZE = 635;
@@ -28,8 +27,8 @@ public class EdgeConvertGUI {
    EdgeRadioButtonListener radioListener;
    EdgeWindowListener edgeWindowListener;
    CreateDDLButtonListener createDDLListener;
-	 private parseEdgeFile parseEdge;
-	 private parseSaveFile parseSave;
+   private parseEdgeFile parseEdge;
+   private parseSaveFile parseSave;
    private EdgeConvertCreateDDL eccd;
    private static PrintWriter pw;
    private EdgeTable[] tables; //master copy of EdgeTable objects
@@ -41,7 +40,7 @@ public class EdgeConvertGUI {
    private ArrayList alSubclasses, alProductNames;
    private String[] productNames;
    private Object[] objSubclasses;
-
+	
    //Define Tables screen objects
    static JFrame jfDT;
    static JPanel jpDTBottom, jpDTCenter, jpDTCenter1, jpDTCenter2, jpDTCenterRight, jpDTCenterRight1, jpDTCenterRight2, jpDTMove;
@@ -70,19 +69,21 @@ public class EdgeConvertGUI {
    static JMenuBar jmbDRMenuBar;
    static JMenu jmDRFile, jmDROptions, jmDRHelp;
    static JMenuItem jmiDROpenEdge, jmiDROpenSave, jmiDRSave, jmiDRSaveAs, jmiDRExit, jmiDROptionsOutputLocation, jmiDROptionsShowProducts, jmiDRHelpAbout;
-   
+
+	
    public EdgeConvertGUI() {
       menuListener = new EdgeMenuListener();
       radioListener = new EdgeRadioButtonListener();
       edgeWindowListener = new EdgeWindowListener();
       createDDLListener = new CreateDDLButtonListener();
+	  
       this.showGUI();
    } // EdgeConvertGUI.EdgeConvertGUI()
    
    public void showGUI() {
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use the OS native LAF, as opposed to default Java LAF
-      } catch (Exception e) {
+	  } catch (Exception e) {
          System.out.println("Error setting native LAF: " + e);
       }
       createDTScreen();
@@ -104,7 +105,9 @@ public class EdgeConvertGUI {
       jfDT.setJMenuBar(jmbDTMenuBar);
 
       jmDTFile = new JMenu("File");
-      jmDTFile.setMnemonic(KeyEvent.VK_F);
+	
+    
+	  jmDTFile.setMnemonic(KeyEvent.VK_F);
       jmbDTMenuBar.add(jmDTFile);
       jmiDTOpenEdge = new JMenuItem("Open Edge File");
       jmiDTOpenEdge.setMnemonic(KeyEvent.VK_E);
@@ -901,7 +904,7 @@ public class EdgeConvertGUI {
          try {
             pw = new PrintWriter(new BufferedWriter(new FileWriter(saveFile, false)));
             //write the identification line
-            pw.println(parseSaveFile.SAVE_ID);
+            pw.println(EdgeConvertFileParser.SAVE_ID);
             //write the tables 
             pw.println("#Tables#");
             for (int i = 0; i < tables.length; i++) {
@@ -963,7 +966,7 @@ public class EdgeConvertGUI {
       return sb.toString();
    }
    
-      private void getOutputClasses() {
+   private void getOutputClasses() {
       File[] resultFiles = {};
       Class resultClass = null;
       Class[] paramTypes = {EdgeTable[].class, EdgeField[].class};
@@ -1053,10 +1056,10 @@ public class EdgeConvertGUI {
 
       try {
          Class selectedSubclass = objSubclasses[selected].getClass();
-         Method getSQLString = selectedSubclass.getMethod("getSQLString", (Class)null);
-         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", (Class)null);
-         strSQLString = (String)getSQLString.invoke(objSubclasses[selected], (Object)null);
-         databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], (Object)null);
+         Method getSQLString = selectedSubclass.getMethod("getSQLString", null);
+         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", null);
+         strSQLString = (String)getSQLString.invoke(objSubclasses[selected], null);
+         databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], null);
       } catch (IllegalAccessException iae) {
          iae.printStackTrace();
       } catch (NoSuchMethodException nsme) {
@@ -1203,6 +1206,7 @@ public class EdgeConvertGUI {
                jmiDTSaveAs.setEnabled(true);
                jmiDRSaveAs.setEnabled(true);
                jbDTDefineRelations.setEnabled(true);
+
 
                jbDTCreateDDL.setEnabled(true);
                jbDRCreateDDL.setEnabled(true);
