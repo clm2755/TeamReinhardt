@@ -963,7 +963,7 @@ public class EdgeConvertGUI {
       return sb.toString();
    }
    
-   private void getOutputClasses() {
+      private void getOutputClasses() {
       File[] resultFiles = {};
       Class resultClass = null;
       Class[] paramTypes = {EdgeTable[].class, EdgeField[].class};
@@ -1001,14 +1001,14 @@ public class EdgeConvertGUI {
             if (resultClass.getSuperclass().getName().equals("EdgeConvertCreateDDL")) { //only interested in classes that extend EdgeConvertCreateDDL
                if (parseFile == null && saveFile == null) {
                   conResultClass = resultClass.getConstructor(paramTypesNull);
-                  objOutput = conResultClass.newInstance((Object)null);
+                  objOutput = conResultClass.newInstance(null);
                   } else {
                   conResultClass = resultClass.getConstructor(paramTypes);
                   objOutput = conResultClass.newInstance(args);
                }
                alSubclasses.add(objOutput);
-               Method getProductName = resultClass.getMethod("getProductName", (Class)null);
-               String productName = (String)getProductName.invoke(objOutput, (Object)null);
+               Method getProductName = resultClass.getMethod("getProductName", null);
+               String productName = (String)getProductName.invoke(objOutput, null);
                alProductNames.add(productName);
             }
          }
