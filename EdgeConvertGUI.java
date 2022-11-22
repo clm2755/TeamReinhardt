@@ -28,7 +28,8 @@ public class EdgeConvertGUI {
    EdgeRadioButtonListener radioListener;
    EdgeWindowListener edgeWindowListener;
    CreateDDLButtonListener createDDLListener;
-   private EdgeConvertFileParser ecfp;
+	 private parseEdgeFile parseEdge;
+	 private parseSaveFile parseSave;
    private EdgeConvertCreateDDL eccd;
    private static PrintWriter pw;
    private EdgeTable[] tables; //master copy of EdgeTable objects
@@ -900,7 +901,7 @@ public class EdgeConvertGUI {
          try {
             pw = new PrintWriter(new BufferedWriter(new FileWriter(saveFile, false)));
             //write the identification line
-            pw.println(EdgeConvertFileParser.SAVE_ID);
+            pw.println(parseSaveFile.SAVE_ID);
             //write the tables 
             pw.println("#Tables#");
             for (int i = 0; i < tables.length; i++) {
@@ -1188,13 +1189,13 @@ public class EdgeConvertGUI {
             returnVal = jfcEdge.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                parseFile = jfcEdge.getSelectedFile();
-               ecfp = new EdgeConvertFileParser(parseFile);
-               tables = ecfp.getEdgeTables();
+               parseEdge = new parseEdgeFile(parseFile);
+               tables = parseEdge.getEdgeTables();
                for (int i = 0; i < tables.length; i++) {
                   tables[i].makeArrays();
                }
-               fields = ecfp.getEdgeFields();
-               ecfp = null;
+               fields = parseEdge.getEdgeFields();
+               parseEdge = null;
                populateLists();
                saveFile = null;
                jmiDTSave.setEnabled(false);
@@ -1227,10 +1228,10 @@ public class EdgeConvertGUI {
             returnVal = jfcEdge.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                saveFile = jfcEdge.getSelectedFile();
-               ecfp = new EdgeConvertFileParser(saveFile);
-               tables = ecfp.getEdgeTables();
-               fields = ecfp.getEdgeFields();
-               ecfp = null;
+               parseSave = new parseSaveFile(saveFile);
+               tables = parseSave.getEdgeTables();
+               fields = parseSave.getEdgeFields();
+               parseSave = null;
                populateLists();
                parseFile = null;
                jmiDTSave.setEnabled(true);
